@@ -1,0 +1,23 @@
+{
+  "name": "reddit-bot",
+  "version": "0.0.1",
+  "description": "A reddit bot that does something. It just doesn't know what yet...",
+  "main": "bot.js",
+  "dependencies": {
+    "nodewhal": "git://github.com/go1dfish/nodewhal"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelowens/reddit-bot.git"
+  },
+  "author": "Michael Owens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelowens/reddit-bot/issues"
+  },
+  "homepage": "https://github.com/michaelowens/reddit-bot"
+}
