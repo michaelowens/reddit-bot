@@ -4,7 +4,7 @@
   "description": "A reddit bot that does something. It just doesn't know what yet...",
   "main": "bot.js",
   "dependencies": {
-    "nodewhal": "git://github.com/go1dfish/nodewhal"
+    "nodewhal": "git://github.com/michaelowens/nodewhal"
   },
   "devDependencies": {},
   "scripts": {
