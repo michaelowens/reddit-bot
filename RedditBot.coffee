@@ -16,23 +16,24 @@ class RedditBot
     @reddit = new Reddit 'xikeon-reddit-bot'
     @reddit.login @config.username, @config.password, (err) =>
       throw err if err?
+
       @loggedIn = true
       log.info 'Logged in with', @config.username
-      @start()
-    
-  start: ->
-    @loop = setInterval @mainLoop, @loopTime if @loggedIn
-    
+      @loop = setInterval @mainLoop, @loopTime
+
   mainLoop: =>
-    #log.debug 'loop'
     self = this
-    @reddit.messages (err, messages) ->
+    @reddit.messages 'unread', (err, messages) ->
       throw err if err?
-      if messages
-        #log.debug messages
-        for msg in messages
-          log.debug 'Received message(' + msg.data.id + '):', msg.data.subject
-          self.reddit.readMessage msg.data.id
+      self.handlePms this, err, messages if messages
+
+  handlePms: (res, err, messages) ->
+    for msg in messages
+      log.debug 'Received message(' + msg.data.id + '):', msg.data.subject
+
+      @reddit.readMessage 't4_' + msg.data.id, res.body.data.modhash, (err) ->
+        throw err if err?
+        log.info 'Message handled:', msg.data.id
 
   @Error: (msg) ->
     Error.captureStackTrace this, arguments.callee
