@@ -1,0 +1,3 @@
+username: YourUsername
+password: YourPassword
+log: [info, error]
