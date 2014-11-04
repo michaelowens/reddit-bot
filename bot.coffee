@@ -15,7 +15,7 @@ fs.exists 'config.yaml', (exists) ->
     config = yaml.load 'config.yaml'
   catch e
     log.error 'Config contains errors! Please check your config file if it is valid YAML.'
-    log.debug e.stack
+    log.error e.stack
     process.exit 1
   
   try
@@ -23,6 +23,6 @@ fs.exists 'config.yaml', (exists) ->
       bot = new RedditBot config
     else
       log.error 'Config failed to load'
+    #bot.start()
   catch e
-    log.error e.message
-    log.debug e.stack
+    log.error e.stack
