@@ -23,6 +23,5 @@ fs.exists 'config.yaml', (exists) ->
       bot = new RedditBot config
     else
       log.error 'Config failed to load'
-    #bot.start()
   catch e
     log.error e.stack
