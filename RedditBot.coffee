@@ -15,12 +15,12 @@ class RedditBot
     log.config = @config.log if typeof @config.log is 'object' and @config.log instanceof Array
     log.info 'RedditBot', 'v' + pjson.version
 
-    @reddit = new Reddit 'xikeon-reddit-bot'
+    @reddit = new Reddit 'xikeon-bot/0.1 by xikeon'
     @start()
 
   # Log in to reddit and initialize the mainLoop
   start: ->
-    @reddit.login @config.username, @config.password, (err) =>
+    @reddit.account.login @config.username, @config.password, (err) =>
       throw err if err?
 
       log.info 'Logged in as', @config.username
@@ -29,7 +29,7 @@ class RedditBot
   # The main loop where all the magic happens
   mainLoop: =>
     self = this
-    @reddit.messages 'unread', (err, messages) ->
+    @reddit.messages.get 'unread', (err, messages) ->
       throw err if err?
       self.handlePms this, err, messages if messages
 
@@ -42,7 +42,7 @@ class RedditBot
     for msg in messages
       log.debug 'Received message(' + msg.data.id + '):', msg.data.subject
 
-      @reddit.readMessage 't4_' + msg.data.id, res.body.data.modhash, (err) ->
+      @reddit.messages.readMessage 't4_' + msg.data.id, res.body.data.modhash, (err) ->
         throw err if err?
         log.info 'Message handled:', msg.data.id
 
